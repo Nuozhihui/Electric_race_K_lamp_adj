@@ -1,7 +1,7 @@
  #include "adc.h"
  #include "delay.h"
  #include "lcd.h"
-
+ #include "gui.h"
 	   
  u16 pwmtim1,pwmhl1,pwmtim2,pwmhl2;	
  int Bias[15],Target_value_inint;			//光敏偏差值
@@ -125,7 +125,7 @@ u16 Get_Adc_Average(u8 ch,u8 times)
 	int value1;
 	int value2;
 	int date[20];
-	int ii=0;
+
 
 	 
 	 date[0]=smoothing_pj(0 ,10)+ Bias[0];
@@ -140,7 +140,7 @@ u16 Get_Adc_Average(u8 ch,u8 times)
 	 date[9]=smoothing_pj(11 ,10)+Bias[9];
 
 		
-					 //上
+		//上
 		 LCD_ShowNum(120,80,date[0],5,18);			//上方左数字		1
 		 LCD_ShowNum(220,80,date[1],5,18);			//上方中数字		2
 		 LCD_ShowNum(320,80,date[2],5,18);			//上方右数字		3

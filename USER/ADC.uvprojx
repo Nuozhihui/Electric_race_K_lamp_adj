@@ -514,16 +514,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>README</GroupName>
-          <Files>
-            <File>
-              <FileName>README.TXT</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\README.TXT</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>LCD</GroupName>
           <Files>
             <File>
@@ -545,6 +535,16 @@
               <FileName>touch.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\LCD\TOUCH\touch.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>README</GroupName>
+          <Files>
+            <File>
+              <FileName>README.TXT</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\README.TXT</FilePath>
             </File>
           </Files>
         </Group>

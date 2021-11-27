@@ -71,4 +71,4 @@ void TIM1_PWM_Init(void)
 {  
 TIM1_GPIO_Config();//对作为TIM外设通道复用的GPIO引脚初始化
 TIM1_Mode_Config ();//对TIM外设初始化
-}
+}	
