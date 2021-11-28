@@ -15,6 +15,7 @@
  	u16 led0pwmval=0;
 	u8 dir=1;	
 	
+
 /*
 *******************************************************************************
 *		模块名称	:	主程序模块
@@ -26,6 +27,7 @@
 *				V0.1			2021-11-26	JINCHANG		初版
 *				v0.2			2021-11-28	JINCHANG		新增PWM ADC
 *				v0.3			2021-11-28	JINCHANG		对PWM AADC优化 编写README文件(接线引脚通道)
+				v0.31			2021-11-29	JINCHANG		对ADC，PWM进行优化 ---(此版本为测试版)
 *			Copyright	(C) , 2021-2021 , JINCHANG	blog.hinuohui.com
 *******************************************************************************
 */
@@ -52,9 +54,9 @@
 	//初始化
 
 
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置中断优先级分组为组2：2位抢占优先级，2位响应优先级
-	delay_init();	    	 //延时函数初始化	  
-	uart_init(115200);	 	//串口初始化为115200
+		NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置中断优先级分组为组2：2位抢占优先级，2位响应优先级
+		delay_init();	    	 //延时函数初始化	  
+		uart_init(115200);	 	//串口初始化为115200
 
 	 LED_Init();			      //LED端口初始化
 	 LCD_Init();	   				//液晶屏初始化
@@ -70,18 +72,25 @@
 	 while(1)
 	 {
 		 
+//		 
+//		/************************************双路PWM测试********************************/
+//		delay_ms(10);	 
+//		if(dir)led0pwmval++;
+//		else led0pwmval--;	 
+// 		if(led0pwmval>1000)dir=0;
+//		if(led0pwmval==0)dir=1;	   					 
+//		TIM_SetCompare1(TIM1,led0pwmval);	   
+//		TIM_SetCompare4(TIM1,led0pwmval);	   
+//		 
+//		//数据处理
+//		DATE();
+		//		/************************************ADC算法测试测试********************************/ 
 		 
-		/************************************双路PWM测试********************************/
-		delay_ms(10);	 
-		if(dir)led0pwmval++;
-		else led0pwmval--;	 
- 		if(led0pwmval>300)dir=0;
-		if(led0pwmval==0)dir=1;	   					 
-		TIM_SetCompare1(TIM1,led0pwmval);	   
-		TIM_SetCompare4(TIM1,led0pwmval);	   
-		 
-
-		 DATE();
+		  led0pwmval=(int)smoothing_pj(0 ,3)*0.244;
+		 LCD_ShowNum(220,145, led0pwmval,5,18);		//右上方数字
+		 	TIM_SetCompare1(TIM1,led0pwmval);	   
+		  TIM_SetCompare4(TIM1,led0pwmval);	 
+		 LCD_ShowNum(220,205,0,5,18);		//右下方数字
 	}
 		 
 	 }

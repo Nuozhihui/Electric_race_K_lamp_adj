@@ -1,9 +1,9 @@
 #include "stm32f10x.h"
 #include "PWM.h"
 
-u16 ARR = 899;//自动重装值
+u16 ARR = 1000;//自动重装值
 u16 PSC = 0;//时钟预分频系数
-u16 CCR = 4;//待装入捕获比较寄存器的脉冲值
+u16 CCR = 0;//待装入捕获比较寄存器的脉冲值
 void TIM1_GPIO_Config (void)
 {
 GPIO_InitTypeDef GPIO_InitStructure; 	
@@ -20,7 +20,7 @@ GPIO_Init(GPIOA, &GPIO_InitStructure);//初始化以上配置
 
 
 /*------配置高级定时器的工作模式------*/
-void TIM1_Mode_Config (void)
+void TIM1_Mode_Config (u16 ARR,u16 PSC)
 {	
 TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;//定义一个TimeBaseInitTypeDef类型的变量
 TIM_OCInitTypeDef  TIM_OCInitStructure;
@@ -40,7 +40,7 @@ TIM_TimeBaseInit(TIM1, &TIM_TimeBaseStructure); //初始化定时器
 /*设置PWM的输出方式,PWM模式配置，通道1：OC1*/
 TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM2; //输出模式配置，主要有PWM1，PWM2。这里：选择定时器模式:TIM脉冲宽度调制模式2
 TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable; //配置输出模式状态：使能或关闭。这里：比较输出使能
-TIM_OCInitStructure.TIM_Pulse = CCR; //设置待装入捕获比较寄存器的脉冲值 
+TIM_OCInitStructure.TIM_Pulse = 0; //设置待装入捕获比较寄存器的脉冲值 
 TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High; //设置有效电平极性，把PWM模式的有效电平设置为高电平或低电平
 	
 TIM_OC1Init(TIM1, &TIM_OCInitStructure);  //根据TIM_OCInitStruct中指定的参数初始化外设TIMx
@@ -70,5 +70,5 @@ TIM_CtrlPWMOutputs(TIM1,ENABLE);	//MOE 主输出使能
 void TIM1_PWM_Init(void)
 {  
 TIM1_GPIO_Config();//对作为TIM外设通道复用的GPIO引脚初始化
-TIM1_Mode_Config ();//对TIM外设初始化
+TIM1_Mode_Config(1000,0);//对TIM外设初始化
 }	

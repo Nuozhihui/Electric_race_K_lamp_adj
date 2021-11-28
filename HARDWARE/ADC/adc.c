@@ -84,28 +84,28 @@ u16 Get_Adc_Average(u8 ch,u8 times)
 } 	 
 
  
-// void Bias_ININT(void)		//光敏偏差值测算
-// {
+ void Bias_ININT(void)		//光敏偏差值测算
+ {
 
 
-//	 pwmhl1=0;
-//	 pwmhl2=0;		
-//	 Bias[0]=Target_value_inint - Get_Adc(0);
-//	 Bias[1]=Target_value_inint - Get_Adc(1);
-//	 Bias[2]=Target_value_inint - Get_Adc(2);
-//	 Bias[3]=Target_value_inint - Get_Adc(3);
-//	 Bias[4]=Target_value_inint - Get_Adc(4);
-//	 Bias[5]=Target_value_inint - Get_Adc(5);
-//	 Bias[6]=Target_value_inint - Get_Adc(6);
-//	 Bias[7]=Target_value_inint - Get_Adc(7);
-//	 Bias[8]=Target_value_inint - Get_Adc(10);
-//	 Bias[9]=Target_value_inint - Get_Adc(11);
-//	//	 printf("A:%d P:%d\n",Get_Adc(0),Bias[0]);	 
-//	 delay_ms(1000);
-//	 pwmhl1=0;
-//	 pwmhl2=0;
-// }
-// 
+	 pwmhl1=0;
+	 pwmhl2=0;		
+	 Bias[0]=Target_value_inint - Get_Adc(0);
+	 Bias[1]=Target_value_inint - Get_Adc(1);
+	 Bias[2]=Target_value_inint - Get_Adc(2);
+	 Bias[3]=Target_value_inint - Get_Adc(3);
+	 Bias[4]=Target_value_inint - Get_Adc(4);
+	 Bias[5]=Target_value_inint - Get_Adc(5);
+	 Bias[6]=Target_value_inint - Get_Adc(6);
+	 Bias[7]=Target_value_inint - Get_Adc(7);
+	 Bias[8]=Target_value_inint - Get_Adc(10);
+	 Bias[9]=Target_value_inint - Get_Adc(11);
+
+	 delay_ms(1000);
+	 pwmhl1=0;
+	 pwmhl2=0;
+ }
+ 
 
 
 
@@ -173,7 +173,7 @@ u16 Get_Adc_Average(u8 ch,u8 times)
 //	 */
 float smoothing_pj(int aisle , int uum)	//去最大，去最小，取平均值
 {
-	 int a[20];
+	 int a[100];
 	int i,max,min,sum;
 	double average;
 
